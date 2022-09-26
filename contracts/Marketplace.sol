@@ -70,7 +70,7 @@ contract Marketplace is ReentrancyGuard {
     function purchaseItem(uint _itemId) external payable nonReentrant {
         uint totalPrice = getTotalPrice(_itemId);
         Item storage item = items[_itemId];
-        require(_itemId > 0 && _itemId < itemCount);
+        require(_itemId > 0 && _itemId <= itemCount);
         require(msg.value >= totalPrice);
         require(!item.sold);
         item.seller.transfer(item.price);
